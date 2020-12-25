@@ -1,0 +1,38 @@
+stages:
+  - lint
+  - build
+
+superlinter:
+  image: github/super-linter:latest
+  stage: lint
+  script: ["true"]
+  variables:
+    RUN_LOCAL: "true"
+    DEFAULT_WORKSPACE: $CI_PROJECT_DIR
+
+lynis:
+  image: alpine:edge
+  stage: lint
+  before_script:
+    - apk add lynis --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+  script:
+    - "lynis audit dockerfile ./ci/go/Containerfile"
+    - "lynis audit dockerfile ./ci/python/Containerfile"
+
+build-go-image:
+  image: quay.io/buildah/stable:latest
+  stage: build
+  before_script:
+    - buildah login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - buildah bud --isolation=chroot --pull -t "$CI_REGISTRY_IMAGE/go-build" ./ci/go/Containerfile
+    - buildah push --creds "$CI_REGISTRY_USER":"$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_IMAGE/go-build"
+
+build-small-python-image:
+  image: quay.io/buildah/stable:latest
+  stage: build
+  before_script:
+    - buildah login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - buildah bud --isolation=chroot --pull -t "$CI_REGISTRY_IMAGE/small-python-build" ./ci/python/Containerfile
+    - buildah push --creds "$CI_REGISTRY_USER":"$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_IMAGE/small-python-build"
