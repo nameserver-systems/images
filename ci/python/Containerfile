@@ -1,7 +1,7 @@
-FROM python:3.8.7-slim-buster
+FROM docker.io/python:3.8.7-slim-buster
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN apt-get update && apt-get -y -q --no-install-recommends install curl=7.64.0-4+deb10u1 lftp=4.8.4-2 git=1:2.20.1-2+deb10u3 make=4.2.1-1.2 && apt-get -y -q autoremove && apt-get -y -q clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y -q --no-install-recommends install curl=7.64.0-4+deb10u2 lftp=4.8.4-2 git=1:2.20.1-2+deb10u3 make=4.2.1-1.2 && apt-get -y -q autoremove && apt-get -y -q clean && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --no-cache-dir poetry==1.1.4
