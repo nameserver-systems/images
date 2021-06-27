@@ -1,4 +1,4 @@
-FROM docker.io/golang:1.15.6-buster
+FROM docker.io/golang:1.16.5-buster
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
