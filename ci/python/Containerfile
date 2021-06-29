@@ -1,4 +1,4 @@
-FROM docker.io/python:3.9.5-slim-buster
+FROM docker.io/python:3.9.6-slim-buster
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
