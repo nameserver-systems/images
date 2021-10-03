@@ -7,4 +7,4 @@ apt-get -y -q --no-install-recommends install curl=7.64.0-4+deb10u2 lftp=4.8.4-2
 apt-get -y -q autoremove && \
 apt-get -y -q clean && \
 rm -rf /var/lib/apt/lists/* && \
-pip install --no-cache-dir poetry==1.1.4
+pip install --no-cache-dir poetry==1.1.10
