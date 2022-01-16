@@ -9,7 +9,7 @@ RUN apt-get update && apt-get -y -q --no-install-recommends install upx-ucl pyth
 RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.43.0
 
 # INSTALL GORELEASER
-RUN wget -O goreleaser_amd64.deb -nv https://github.com/goreleaser/goreleaser/releases/download/v1.3.1/goreleaser_amd64.deb && dpkg -i goreleaser_amd64.deb
+RUN wget -O goreleaser_amd64.deb -nv https://github.com/goreleaser/goreleaser/releases/download/v1.3.1/goreleaser_v1.3.1_amd64.deb && dpkg -i goreleaser_amd64.deb
 
 # INSTALL MINIO CLI
 RUN wget -nv https://dl.min.io/client/mc/release/linux-amd64/mc && mv mc /usr/bin/ && chmod +x /usr/bin/mc
