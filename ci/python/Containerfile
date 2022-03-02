@@ -1,4 +1,4 @@
-FROM docker.io/python:3.9.9-slim
+FROM docker.io/python:3.9.10-slim
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -7,4 +7,4 @@ apt-get -y -q --no-install-recommends install curl lftp git git-lfs make && \
 apt-get -y -q autoremove && \
 apt-get -y -q clean && \
 rm -rf /var/lib/apt/lists/* && \
-pip install --no-cache-dir poetry==1.1.12
+pip install --no-cache-dir poetry==1.1.13
